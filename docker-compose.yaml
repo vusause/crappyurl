@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    ports:
+     - 5432:5432
+    expose:
+     - 5432
+    environment:
+     - PG_USER=crappyurl
+     - PG_PWD=tinyurl
+     - PG_DB=crappyurl
+    volumes:
+     - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+        test: "nc -z localhost 5432"
+        interval: 1s
+        timeout: 10s
+        retries: 10

@@ -1,15 +1,13 @@
+const config  = require('../config');
 const router  = require('express').Router();
-const shortid = require("shortid");
+const shortid = require('shortid');
 
-const domain = process.env.DOMAIN || 'http://localhost:9999/';
+const domain  = config.domain;
 
+require('../models');
+
+// Will replace with Sequelize Client
 const DB = {};
-
-/*
-router.get('/', (req, res) => {
-    res.send
-});
-*/
 
 router.get('/:hash', (req, res) => {
     const { hash } = req.params;
@@ -36,7 +34,7 @@ router.post('/', (req, res) => {
 
     // validate user url and return shortened url
     if (validate_url.test(url)) {
-        const full_url = domain + path;
+        const full_url = domain + '/' + path;
         res.json({ payload: full_url });
     }
 
