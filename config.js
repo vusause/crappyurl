@@ -8,6 +8,8 @@ config.db = {};
 config.db.user = process.env.PG_USER;
 config.db.password = process.env.PG_PASS;
 config.db.name = process.env.PG_NAME;
+config.db.host = process.env.PG_HOST;
+conifg.db.port = process.env.PG_PORT;
 
 // ====== EXPRESS =======
 config.server = {};

@@ -7,9 +7,9 @@ services:
     expose:
      - 5432
     environment:
-     - PG_USER=crappyurl
-     - PG_PWD=tinyurl
-     - PG_DB=crappyurl
+     - POSTGRES_USER=crappyurl
+     - POSTGRES_PASSWORD=tinyurl
+     - POSTGRES_DB=crappyurl
     volumes:
      - ./data/postgres:/var/lib/postgresql/data
     healthcheck:
