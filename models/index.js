@@ -3,6 +3,7 @@
 const fs        = require('fs');
 const path      = require('path');
 const Sequelize = require('sequelize');
+const shortid   = require('shortid');
 const config    = require('../config');
 const db        = {};
 
@@ -26,6 +27,42 @@ fs.readdirSync(__dirname).filter((file) => {
 	const model = sequelize['import'](path.join(__dirname, file));
 	db[model.name] = model;
 });
+
+db.get_url = (hash) => {
+	return db.urls.findOne({
+		where: { hash: hash },
+	}).then((url) => {
+		if (url == null) { throw new Error('URL does not exist'); }
+		return url;
+	}).catch((err) => {
+		console.error(err);
+	});
+}
+
+db.get_hash = (url) => {
+	return db.urls.findOne({
+		where: { original_url: url },
+	}).then((url) => {
+		if (url == null) { throw new Error('URL does not exist'); }
+		return url;
+	}).catch((err) => {
+		console.error(err);
+	});
+}
+
+db.add_url = (url) => {
+	const url_entry = {
+		original_url: url,
+		hash: shortid.generate(),
+	}
+
+	return db.urls.create(url_entry).then((response) => {
+		return true;
+	}).catch((err) => {
+		console.error(err);
+		return false;
+	});
+}
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
