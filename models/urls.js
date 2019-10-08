@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('urls', {
+	const urls = sequelize.define('urls', {
 		hash: {
 			type: DataTypes.STRING,
 			primaryKey: true,
@@ -9,4 +9,6 @@ module.exports = (sequelize, DataTypes) => {
 			allowNull: false,
 		},
 	}, {});
+
+	return urls;
 };

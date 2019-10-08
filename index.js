@@ -8,7 +8,7 @@ const body_parser = require('body-parser');
 
 // CORS middleware
 const cors = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*'); // Should use DNS name from k8s service
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
